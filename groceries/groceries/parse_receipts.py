@@ -66,6 +66,40 @@ def extract_text_from_image(image):
     return text
 
 
+def extract_items_from_text(text):
+    items = []
+
+    # Split text into lines
+    lines = text.split('\n')
+
+    # Extract description and price from each line
+    for line in lines:
+        # Example: "Item description $9.99"
+        match = re.match(r'(.+)\s+([\d.,]+)', line)
+        if match:
+            description, price = match.groups()
+            items.append({"description": description.strip(), "price": price.strip()})
+
+    return items
+
+
+# # Example usage:
+# input_image_path = "path/to/your/receipt/photo.jpg"
+# preprocessed_image = preprocess_receipt(input_image_path)
+#
+# # Extract text from the preprocessed image
+# extracted_text = extract_text_from_image(preprocessed_image)
+#
+# # Extract description and price of each item
+# items = extract_items_from_text(extracted_text)
+#
+# # Display the extracted items
+# print("Extracted Items:")
+# for item in items:
+#     print(f"Description: {item['description']}, Price: {item['price']}")
+#
+    
+
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
 
